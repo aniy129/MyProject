@@ -10,6 +10,6 @@ public class HomeController {
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
-        return  "yes2";
+        return  "yes23";
     }
 }

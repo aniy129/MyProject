@@ -9,11 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-@SuppressWarnings("unused")
 public class Bootstrap implements WebApplicationInitializer
 {
     @Override
-    public void onStartup(ServletContext container) throws ServletException
+    public void onStartup(ServletContext container)
     {
         container.getServletRegistration("default").addMapping("/resource/*");
 
