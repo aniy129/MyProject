@@ -2,8 +2,6 @@ MyProject
 
 <div style="color:red;">
 	<a href="http://www.baidu.com" >百度一下</a>
-	<br/>
-	<br/>
-	<br/>
-	<div>我的页面</div>
+	<span>用户名：</span>	<input type="text" /><br/>
+	<span>密码：</span>	<input type="password" />
 </div>
