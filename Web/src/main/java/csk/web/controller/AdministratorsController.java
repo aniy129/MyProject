@@ -1,16 +1,21 @@
 package csk.web.controller;
 
+import csk.service.interfaces.IAdministratorsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.inject.Inject;
+
+@RequestMapping("/administrator")
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+public class AdministratorsController {
+    @Inject
+    private IAdministratorsService bll;
     @RequestMapping("/index")
     @ResponseBody
     public String index(){
-        int x=5%3;
-        return  Integer.toString(x);
+        Integer count= bll.getAdmins().size();
+        return count.toString()+" hello";
     }
 }
