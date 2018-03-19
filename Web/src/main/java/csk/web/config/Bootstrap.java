@@ -14,12 +14,12 @@ public class Bootstrap implements WebApplicationInitializer
     public void onStartup(ServletContext container)
     {
         container.getServletRegistration("default").addMapping("/resource/*");
-
+        //设置spring bean配置
         AnnotationConfigWebApplicationContext rootContext =
                 new AnnotationConfigWebApplicationContext();
         rootContext.register(RootContextConfiguration.class);
         container.addListener(new ContextLoaderListener(rootContext));
-
+        //设置spring mvc配置
         AnnotationConfigWebApplicationContext servletContext =
                 new AnnotationConfigWebApplicationContext();
         servletContext.register(ServletContextConfiguration.class);

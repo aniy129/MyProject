@@ -101,7 +101,7 @@ public class DataBaseConfig {
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(druidDataSource());
-        sessionFactory.setTypeAliasesPackage("com.huang.domain");
+        sessionFactory.setTypeAliasesPackage("csk.dal.mybatis");
         sessionFactory.setConfigLocation( new ClassPathResource("/Configuration.xml"));
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:SqlFiles/*.xml"));
         return sessionFactory;
