@@ -11,6 +11,7 @@ public class HomeController {
     @ResponseBody
     public String index(){
         int x=5%3;
+        System.out.println("+++");
         return  Integer.toString(x);
     }
 }
