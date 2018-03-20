@@ -14,8 +14,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+/*
+ * 数据库配置
+ * */
 @MapperScan(basePackages = "csk.dal.mybatis")
-public class DataBaseConfig {
+public class DataBaseConfiguration {
     private Logger logger = LogManager.getLogger();
 
     @Value("${spring.datasource.url}")
@@ -94,7 +97,7 @@ public class DataBaseConfig {
 
     @Bean
     public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(druidDataSource() );
+        return new DataSourceTransactionManager(druidDataSource());
     }
 
     @Bean
@@ -102,7 +105,7 @@ public class DataBaseConfig {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(druidDataSource());
         sessionFactory.setTypeAliasesPackage("csk.dal.mybatis");
-        sessionFactory.setConfigLocation( new ClassPathResource("/Configuration.xml"));
+        sessionFactory.setConfigLocation(new ClassPathResource("/Configuration.xml"));
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:SqlFiles/*.xml"));
         return sessionFactory;
     }

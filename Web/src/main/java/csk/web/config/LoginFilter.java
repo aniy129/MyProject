@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-
+/*
+ *登陆配置
+ * */
 @WebFilter(
         filterName="LoginFilter",
         urlPatterns="/*",

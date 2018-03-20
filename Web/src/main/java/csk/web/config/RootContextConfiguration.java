@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 * spring 根上下文
 * */
 @Configuration
-@Import(DataBaseConfig.class)
+@Import({DataBaseConfiguration.class,ScheduleConfiguration.class})
 //@ImportResource("classpath:1.xml")//导入xml配置
 @PropertySource(value={"classpath:database.properties"})//导入class配置
 @ComponentScan(
