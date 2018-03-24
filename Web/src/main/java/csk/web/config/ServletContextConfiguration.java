@@ -1,20 +1,23 @@
 package csk.web.config;
 
+import csk.web.config.filter.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.RequestToViewNameTranslator;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-//WebMvcConfigurationSupport 代替 WebMvcConfigurerAdapter
+import java.util.Locale;
+
+//WebMvcConfigurer 代替 WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 @ComponentScan(
@@ -22,19 +25,23 @@ import org.springframework.web.servlet.view.JstlView;
         useDefaultFilters = false,
         includeFilters = @ComponentScan.Filter(Controller.class)
 )
-public class ServletContextConfiguration extends WebMvcConfigurationSupport {
+public class ServletContextConfiguration implements WebMvcConfigurer {
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        super.addInterceptors(registry);
-        registry.addInterceptor(initializingInterceptor());
+        registry.addInterceptor(new LoginInterceptor()).excludePathPatterns("/static/*","/","/home","/home/index");
+        registry.addInterceptor(new LocaleChangeInterceptor());
     }
 
     @Bean
-    public MyHandlerInterceptor initializingInterceptor() {
-
-        MyHandlerInterceptor ic = new MyHandlerInterceptor();
-
-        return ic;
+    public LocaleResolver localeResolver() {
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+        cookieLocaleResolver.setDefaultLocale(Locale.CHINA);
+        cookieLocaleResolver.setCookieName("my_project_language_country");
+        cookieLocaleResolver.setCookieHttpOnly(true);
+        cookieLocaleResolver.setCookieMaxAge(60 * 60 * 24 * 30);//过期时间30天
+        cookieLocaleResolver.setCookiePath("/");
+        return cookieLocaleResolver;
     }
 
     /*
@@ -45,7 +52,7 @@ public class ServletContextConfiguration extends WebMvcConfigurationSupport {
         InternalResourceViewResolver resolver =
                 new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/jsp/view/");
+        resolver.setPrefix("/WEB-INF/jsp/");
         resolver.setSuffix(".jsp");
         return resolver;
     }

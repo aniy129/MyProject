@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface IAdministratorsService {
     List<Administrators> getAdmins();
+    Administrators login(String userName);
 }

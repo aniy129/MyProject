@@ -8,5 +8,8 @@ import java.util.List;
 @Repository
 public interface IAdministratorsDAL {
 
-List<Administrators> getAdmins();
+    List<Administrators> getAdmins();
+
+    Administrators login(String userName);
+
 }

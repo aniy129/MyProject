@@ -1,4 +1,4 @@
-package csk.web.config;
+package csk.web.config.filter;
 
 import com.alibaba.druid.support.http.WebStatFilter;
 import org.springframework.core.annotation.Order;

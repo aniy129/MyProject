@@ -13,7 +13,7 @@ public class Bootstrap implements WebApplicationInitializer
     @Override
     public void onStartup(ServletContext container)
     {
-        container.getServletRegistration("default").addMapping("/resource/*");
+        container.getServletRegistration("default").addMapping("/static/*");
         //设置spring bean配置
         AnnotationConfigWebApplicationContext rootContext =
                 new AnnotationConfigWebApplicationContext();

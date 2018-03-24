@@ -4,4 +4,7 @@
     <select id="getAdmins" resultType="csk.entity.database.Administrators">
   	select * from Administrators
   </select>
+    <select id="login" resultType="csk.entity.database.Administrators" parameterType="java.lang.String">
+    select * from Administrators WHERE UserName=#{userName}
+    </select>
 </mapper>
