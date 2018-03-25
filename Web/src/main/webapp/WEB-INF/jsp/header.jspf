@@ -1,0 +1,84 @@
+<script>
+    var rootContext="<c:url value="/"/>";
+</script>
+<script type="application/x-javascript"> addEventListener("load", function () {
+    setTimeout(hideURLbar, 0);
+}, false);
+
+function hideURLbar() {
+    window.scrollTo(0, 1);
+} </script>
+<!--start-smoth-scrolling-->
+<script type="text/javascript" src="<c:url value="/static/js/move-top.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/static/js/easing.js"/>"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+        });
+    });
+</script>
+</head>
+<body>
+<!-- header -->
+<div class="main"/>
+<div class="header"/>
+<div class="container"/>
+<div class="top-nav">
+    <span class="menu"> </span>
+    <ul>
+        <li class="active"><a href="index.html">About us</a></li>
+        <li><a href="what.html"> What we do</a></li>
+        <li><a href="donate.html"> Donate </a></li>
+        <li><a href="blog.html"> Blog</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+        <div class="clearfix"></div>
+    </ul>
+</div>
+<div style="float:right; margin-top: -20px; width: 80px; margin-right: -40px;">
+    <a style="cursor: pointer;" href="<c:url value="/loginOut"/>" ><spring:message code="home.loginOut.loginOut"/></a>
+</div>
+<div class="search-box">
+    <div id="sb-search" class="sb-search">
+        <form>
+            <input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search"
+                   id="search">
+            <input class="sb-search-submit" type="submit" value="">
+            <span class="sb-icon-search"> </span>
+        </form>
+    </div>
+</div>
+<script src="<c:url value="/static/js/classie.js"/>"></script>
+<script src="<c:url value="/static/js/uisearch.js"/>"></script>
+<script>
+    new UISearch(document.getElementById('sb-search'));
+</script>
+<!-- //search-scripts -->
+<div class="clearfix"></div>
+</div>
+
+<!-- script-for-nav -->
+<script>
+    $(document).ready(function () {
+        $("span.menu").click(function () {
+            $(".top-nav ul").slideToggle(300);
+        });
+    });
+</script>
+<!-- script-for-nav -->
+<!-- /top-nav -->
+<div class="clearfix"></div>
+</div>
+</div>
+<div class="banner">
+    <div class="slider-caption">
+        <h2>HELP HAND SErves Here</h2>
+        <p> simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+            dummy text ever since the 1500s simply dummy text of the printing and typesetting industry. </p>
+        <div class="learn-button">
+            <a class="slide-btn" href="#">DONATE NOW</a>
+        </div>
+    </div>
+</div>
+<!-- /header -->

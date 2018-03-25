@@ -25,7 +25,7 @@ public class HomeController {
     public String index(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object user = session.getAttribute("user");
-        if (user!=null){
+        if (user != null) {
             return "redirect:/main/index";
         }
         return "home/index";
@@ -36,7 +36,7 @@ public class HomeController {
         Administrators administrators = administratorsService.login(userName);
         if (administrators != null && administrators.getPwd().equals(password)) {
             HttpSession session = request.getSession();
-            session.setAttribute("user",administrators);
+            session.setAttribute("user", administrators);
             return "redirect:/main/index";
         } else {
             model.addAttribute("userName", userName);
@@ -47,5 +47,11 @@ public class HomeController {
         }
     }
 
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
 
 }
