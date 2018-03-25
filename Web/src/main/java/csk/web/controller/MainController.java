@@ -12,4 +12,8 @@ public class MainController {
     {
         return "main/index";
     }
+    @RequestMapping("/example")
+    public String example(){
+        return "example";
+    }
 }

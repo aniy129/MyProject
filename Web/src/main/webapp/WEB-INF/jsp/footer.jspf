@@ -1,3 +1,4 @@
+<div class="clear" style="margin-bottom: 10px;"></div>
 <!--/start-footer-->
 <div class="footer">
     <div class="container">
@@ -17,7 +18,7 @@
                 <h3>Join our news letter</h3>
                 <p>Lorem Ipsum is simply dummy text of theprinting and typesetting industry.</p>
                 form method="post" action="contact-post.html">
-                <a class="sign-btn" href="signup.html">Sign up</a>
+
             </div>
             <div class="col-md-4 copy-right">
                 <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a
