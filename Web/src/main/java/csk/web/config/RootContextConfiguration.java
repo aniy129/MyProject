@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * */
 @Configuration
 @PropertySource({"classpath:MyProject.properties", "classpath:database.properties"})//导入资源配置文件
-@Import({DataBaseConfiguration.class, ScheduleConfiguration.class, LanguageConfiguration.class})//导入class配置
+@Import({DataBaseConfiguration.class, ScheduleConfiguration.class, LanguageConfiguration.class,ValidateConfiguration.class})//导入class配置
 //@ImportResource("classpath:1.xml")//导入xml配置
 @ComponentScan(
         basePackages = {"csk.dal.mybatis", "csk.service.interfaces", "csk.services.implement"},

@@ -1,13 +1,31 @@
 package csk.entity.database;
 
 
+import csk.validate.annotation.CheckUserNameIsExist;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Administrators {
 
   private long id;
+  @CheckUserNameIsExist
+  @NotNull(message = "{administrator.create.userName.required.msg}")
+  @Size(min = 1,max = 20,message ="{administrator.create.userName.required.msg}" )
   private String userName;
+  @Size(min = 1,max = 20,message ="{administrator.create.name.required.msg}" )
+  @NotNull(message = "{administrator.create.name.required.msg}")
   private String name;
+  @Size(min = 1,max = 20,message ="{administrator.create.pwd.required.msg}" )
+  @NotNull(message = "{administrator.create.pwd.required.msg}")
   private String pwd;
+  @Size(min = 1,max = 20,message ="{administrator.create.email.required.msg}" )
+  @NotNull(message = "{administrator.create.email.required.msg}")
   private String email;
+  @Size(min = 1,max = 20,message ="{administrator.create.phone.required.msg}" )
+  @NotNull(message = "{administrator.create.phone.required.msg}")
+  @Pattern(message ="{administrator.create.phone.error.msg}",regexp = "^1[0-9]{10}$")
   private String phone;
   private String code;
   private long state;

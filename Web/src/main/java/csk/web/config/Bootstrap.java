@@ -29,4 +29,5 @@ public class Bootstrap implements WebApplicationInitializer
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }
+
 }

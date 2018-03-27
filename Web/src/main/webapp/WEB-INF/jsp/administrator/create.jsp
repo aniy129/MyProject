@@ -5,56 +5,49 @@
 <%--模板的中心区域--%>
 <div class="col-md-8 donate-right">
     <div class="donate-top">
-        <h3>Personal information</h3>
-        <form>
+        <h3><spring:message code="administrator.create.notice"/></h3>
+        <form action="<c:url value="/administrator/create"/>" method="post">
             <div>
-                <span>First Name<label>:</label></span>
-                <input type="text">
+                <span><spring:message code="administrator.userName"></spring:message><label>:</label></span>
+                <input type="text" name="userName" value="${admin.userName}"/>
+                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">${userName}</span>
             </div>
             <div class="clearfix"></div>
             <div>
-                <span>Last Name<label>:</label></span>
-                <input type="text"/>
-                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">错误提示</span>
+                <span><spring:message code="administrator.name"/><label>:</label></span>
+                <input type="text" name="name" value="${admin.name}"/>
+                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">${name}</span>
             </div>
             <div class="clearfix"></div>
             <div>
-                <span>Email Address<label>:</label></span>
-                <input type="text">
-                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">错误提示</span>
+                <span><spring:message code="administrator.pwd"/><label>:</label></span>
+                <input type="text" name="pwd" value="${admin.pwd}"/>
+                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">${pwd}</span>
             </div>
             <div class="clearfix"></div>
             <div>
-                <span>Address<label>:</label></span>
-                <input type="text">
+                <span><spring:message code="administrator.email"/><label>:</label></span>
+                <input type="text" name="email" value="${admin.email}"/>
+                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">${email}</span>
             </div>
             <div class="clearfix"></div>
             <div>
-                <span>Credit card No<label>:</label></span>
-                <input type="text">
+                <span><spring:message code="administrator.phone"/><label>:</label></span>
+                <input type="text" name="phone" value="${admin.phone}"/>
+                <span style="margin-left: 850px;margin-top: -60px; color: red;width: 200px;">${phone}</span>
             </div>
             <div class="clearfix"></div>
-            <div>
-                <span>City<label>:</label></span>
-                <input type="text">
-            </div>
-            <div class="clearfix"></div>
-            <div>
-                <span>State<label>:</label></span>
-                <select name="city">
-                    <option value="select your location"> states</option>
-                    <option value="saab">location1</option>
-                    <option value="fiat">location2</option>
-                    <option value="audi">location3</option>
-                </select>
-            </div>
-            <div class="clearfix"></div>
-            <div>
-                <span>Zip<label>:</label></span>
-                <input type="text">
-            </div>
-            <div class="clearfix"></div>
-            <input type="submit" value="Donate">
+            <%--<div>--%>
+                <%--<span>State<label>:</label></span>--%>
+                <%--<select name="city">--%>
+                    <%--<option value="select your location"> states</option>--%>
+                    <%--<option value="saab">location1</option>--%>
+                    <%--<option value="fiat">location2</option>--%>
+                    <%--<option value="audi">location3</option>--%>
+                <%--</select>--%>
+            <%--</div>--%>
+            <%--<div class="clearfix"></div>--%>
+            <input type="submit" value="<spring:message code="administrator.create"/> ">
 
         </form>
     </div>

@@ -46,7 +46,7 @@
                         <form role="form"
                               action="<c:url value="/"/>"
                               method="post" class="login-form">
-                            <label>${msg}</label>
+                            <label style="color: red">${msg}</label>
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>
                                 <input type="text" name="userName"

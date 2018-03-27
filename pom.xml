@@ -20,6 +20,8 @@
         <spring.boot.version>2.0.0.M3</spring.boot.version>
         <mysql.connector.java.version>5.1.24</mysql.connector.java.version>
         <javax.inject.version>1</javax.inject.version>
+        <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
+        <validation-api>2.0.1.Final</validation-api>
     </properties>
     <modules>
         <module>Web</module>
