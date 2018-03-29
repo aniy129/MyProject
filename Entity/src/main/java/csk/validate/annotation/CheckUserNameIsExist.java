@@ -8,6 +8,9 @@ import javax.validation.ReportAsSingleViolation;
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.*;
 
+/*
+* 自定义验证接口
+* */
 @SuppressWarnings("unused")
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE,
         ElementType.CONSTRUCTOR, ElementType.PARAMETER})
@@ -27,7 +30,7 @@ public @interface CheckUserNameIsExist {
             ElementType.CONSTRUCTOR, ElementType.PARAMETER})
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
-    static @interface List {
+    @interface List {
         CheckUserNameIsExist[] value();
     }
 }

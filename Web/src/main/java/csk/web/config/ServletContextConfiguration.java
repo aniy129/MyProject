@@ -23,7 +23,9 @@ import javax.inject.Inject;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
-
+/*
+* web站点配置类
+* */
 //WebMvcConfigurer 代替 WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc

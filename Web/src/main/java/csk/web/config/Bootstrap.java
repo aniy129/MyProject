@@ -13,13 +13,15 @@ public class Bootstrap implements WebApplicationInitializer
     @Override
     public void onStartup(ServletContext container)
     {
+        //加载静态资源
         container.getServletRegistration("default").addMapping("/static/*");
+
         //设置spring bean配置
         AnnotationConfigWebApplicationContext rootContext =
                 new AnnotationConfigWebApplicationContext();
         rootContext.register(RootContextConfiguration.class);
         container.addListener(new ContextLoaderListener(rootContext));
-        //设置spring mvc配置
+        //设置spring mvc上下文
         AnnotationConfigWebApplicationContext servletContext =
                 new AnnotationConfigWebApplicationContext();
         servletContext.register(ServletContextConfiguration.class);
@@ -28,6 +30,16 @@ public class Bootstrap implements WebApplicationInitializer
         );
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+
+        //配置restful上下文
+        AnnotationConfigWebApplicationContext restfulContext=
+                new AnnotationConfigWebApplicationContext();
+        restfulContext.register(RestfulContextConfiguration.class);
+        ServletRegistration.Dynamic restfulDispatcher = container.addServlet(
+                "restfulDispatcher", new DispatcherServlet(restfulContext));
+        restfulDispatcher.setLoadOnStartup(2);
+        restfulDispatcher.addMapping("/Services/Rest/*");
+
     }
 
 }

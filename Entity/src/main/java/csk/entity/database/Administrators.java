@@ -3,6 +3,7 @@ package csk.entity.database;
 
 import csk.validate.annotation.CheckUserNameIsExist;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,6 +23,7 @@ public class Administrators {
   private String pwd;
   @Size(min = 1,max = 20,message ="{administrator.create.email.required.msg}" )
   @NotNull(message = "{administrator.create.email.required.msg}")
+  @Email(message = "{administrator.create.email.error.msg}")
   private String email;
   @Size(min = 1,max = 20,message ="{administrator.create.phone.required.msg}" )
   @NotNull(message = "{administrator.create.phone.required.msg}")
