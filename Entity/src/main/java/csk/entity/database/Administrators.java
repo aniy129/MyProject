@@ -3,11 +3,14 @@ package csk.entity.database;
 
 import csk.validate.annotation.CheckUserNameIsExist;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Administrators")
 public class Administrators {
 
   private long id;
@@ -34,7 +37,8 @@ public class Administrators {
   private String imagePath;
   private java.sql.Timestamp regTime;
 
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public long getId() {
     return id;
   }

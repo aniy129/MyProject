@@ -1,6 +1,7 @@
 package csk.web.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import csk.web.annotation.RestEndpointAdvice;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,9 +27,9 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(
-        basePackages = "csk.web.restful",
+        basePackages = {"csk.web.restful","csk.web.annotation","csk.web.exception"},
         useDefaultFilters = false,
-        includeFilters = @ComponentScan.Filter(Controller.class)
+        includeFilters = @ComponentScan.Filter({Controller.class,RestEndpointAdvice.class})
 )
 public class RestfulContextConfiguration implements WebMvcConfigurer {
 

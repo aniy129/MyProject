@@ -94,11 +94,17 @@ public class DataBaseConfiguration {
         return datasource;
     }
 
+    /*
+     * 基于数据库事务管理
+     * */
     @Bean
     public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(druidDataSource());
     }
 
+    /*
+     * 数据库会话
+     * */
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
