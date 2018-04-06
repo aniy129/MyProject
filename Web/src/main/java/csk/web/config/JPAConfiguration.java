@@ -52,7 +52,7 @@ public class JPAConfiguration {
     }
 
     /*
-     * 基于jpa的事务，存一个以上的事务需要在调用的类上指定具体的事务名称
+     * 基于jpa的事务，有一个以上的事务需要在调用的类上指定具体的事务名称
      * */
     @Bean
     public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory factory) {

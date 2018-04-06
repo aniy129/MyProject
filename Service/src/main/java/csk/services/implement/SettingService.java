@@ -1,6 +1,7 @@
 package csk.services.implement;
 
 import csk.dal.jpa.ISettingDAL;
+import csk.entity.database.Administrators;
 import csk.entity.database.Setting;
 import csk.service.interfaces.ISettingService;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,10 @@ public class SettingService implements ISettingService {
     @Override
     public List<Setting> getAll() {
         return  dal.getAll();
+    }
+
+    @Override
+    public void addSettingAndAdministrator(Setting setting, Administrators administrators, boolean isException) throws Exception {
+        dal.addSettingAndAdministrator(setting,administrators,isException);
     }
 }
