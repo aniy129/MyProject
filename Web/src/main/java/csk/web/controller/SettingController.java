@@ -6,6 +6,7 @@ import csk.service.interfaces.ISettingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,22 +21,23 @@ public class SettingController {
     private Logger logger = LogManager.getLogger();
     @Inject
     ISettingService bll;
+
     @RequestMapping("/index")
     @ResponseBody
-    public String index(){
+    public String index() {
         Setting setting = bll.get(1);
-       return setting.getDescription();
+        return setting.getDescription();
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public String add(){
+    public String add() {
         Setting setting = new Setting();
         setting.setDescription("我的测试");
         setting.setValue("100");
         setting.setName("testAdd");
         bll.add(setting);
-        return  "ok";
+        return "ok";
     }
 
     @RequestMapping("/tran")
@@ -46,7 +48,7 @@ public class SettingController {
         setting.setValue("1000");
         setting.setName("transaction");
 
-        Administrators administrators=new Administrators();
+        Administrators administrators = new Administrators();
         administrators.setCode(UUID.randomUUID().toString());
         administrators.setEmail("test@163.com");
         administrators.setName("事务测试admin");
@@ -56,12 +58,18 @@ public class SettingController {
         administrators.setUserName("admin");
         administrators.setRegTime(Timestamp.from(Instant.now()));
         try {
-            bll.addSettingAndAdministrator(setting,administrators,isException);
+            bll.addSettingAndAdministrator(setting, administrators, isException);
         } catch (Exception e) {
-          //  e.printStackTrace();
-            logger.error(e.getMessage(),e);
-            return  "已回滚";
+            //  e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            return "已回滚";
         }
-        return  "事务提交成功";
+        return "事务提交成功";
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public String list() {
+        return bll.getAll().toArray().toString();
     }
 }

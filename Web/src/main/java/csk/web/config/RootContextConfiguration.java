@@ -11,7 +11,10 @@ import org.springframework.stereotype.Controller;
 @Configuration
 @PropertySource({"classpath:MyProject.properties", "classpath:database.properties"})//导入资源配置文件
 @ComponentScan(
-        basePackages = {"csk.dal.mybatis", "csk.dal.jpa", "csk.service.interfaces", "csk.services.implement"},
+        basePackages = {"csk.dal.mybatis",
+                "csk.dal.jpa",
+                "csk.service.interfaces",
+                "csk.services.implement"},
         excludeFilters = @ComponentScan.Filter(Controller.class)
 )
 @Import({DataBaseConfiguration.class,

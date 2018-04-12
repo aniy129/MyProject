@@ -1,8 +1,6 @@
 package csk.entity.database;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "Setting")
 @Entity
@@ -14,6 +12,7 @@ public class Setting {
     private String description;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

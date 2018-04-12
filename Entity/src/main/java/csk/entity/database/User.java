@@ -1,6 +1,9 @@
 package csk.entity.database;
 
+import javax.persistence.*;
 
+@Table(name = "User")
+@Entity
 public class User {
 
   private long id;
@@ -26,7 +29,8 @@ public class User {
   private java.sql.Timestamp secondLsLTgTime;
   private java.sql.Timestamp regTime;
 
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public long getId() {
     return id;
   }

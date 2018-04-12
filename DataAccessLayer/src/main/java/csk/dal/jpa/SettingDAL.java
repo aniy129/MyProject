@@ -26,7 +26,8 @@ public class SettingDAL implements ISettingDAL {
     }
 
     public List<Setting> getAll() {
-        return null;
+        return entityManager.createQuery("select a from Setting a ", Setting.class).getResultList();
+
     }
 
     /*
