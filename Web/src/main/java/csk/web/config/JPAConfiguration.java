@@ -1,5 +1,6 @@
 package csk.web.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -32,7 +33,11 @@ import java.util.Map;
         transactionManagerRef = "jpaTransactionManager"
 )
 public class JPAConfiguration {
+    /*
+    * 多数据源时按照名字装配
+    * */
     @Inject
+    @Qualifier("druidDataSource")
     private DataSource dataSource;
 
     @Bean

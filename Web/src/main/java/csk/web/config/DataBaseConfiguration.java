@@ -69,7 +69,7 @@ public class DataBaseConfiguration {
     @Value("${spring.datasource.logSlowSql}")
     private String logSlowSql;
 
-    @Bean
+    @Bean(name = "druidDataSource")
     public DataSource druidDataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(dbUrl);
