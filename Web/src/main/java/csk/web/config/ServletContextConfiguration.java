@@ -1,14 +1,27 @@
 package csk.web.config;
 
 import csk.web.config.filter.LoginInterceptor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.support.DomainClassConverter;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.SortHandlerMethodArgumentResolver;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.RequestToViewNameTranslator;
 import org.springframework.web.servlet.ViewResolver;
@@ -23,12 +36,14 @@ import javax.inject.Inject;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Locale;
+
 /*
-* web站点配置类
-* */
+ * web站点配置类
+ * */
 //WebMvcConfigurer 代替 WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
+@EnableSpringDataWebSupport //支持从控制参数直接创建Pageable对象
 @ComponentScan(
         basePackages = "csk.web.controller",
         useDefaultFilters = false,
@@ -36,20 +51,62 @@ import java.util.Locale;
 )
 public class ServletContextConfiguration implements WebMvcConfigurer {
 
+    private static final Logger log = LogManager.getLogger();
     @Inject
     SpringValidatorAdapter validator;
+
+    @Inject
+    ApplicationContext applicationContext;
 
     @Override
     public Validator getValidator() {
         return this.validator;
     }
 
+    /*
+     * 添加拦截器
+     * */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor()).excludePathPatterns("/static/*", "/", "/home", "/home/index");
         registry.addInterceptor(new LocaleChangeInterceptor());
     }
 
+    /**
+     * 为Pageable添加参数支持
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        Sort defaultSort = new Sort(new Sort.Order(Sort.Direction.DESC, "id"));
+        Pageable defaultPageable = new PageRequest(1, 10, defaultSort);
+
+        SortHandlerMethodArgumentResolver sortResolver =
+                new SortHandlerMethodArgumentResolver();
+        sortResolver.setSortParameter("paging.sort");
+        sortResolver.setFallbackSort(defaultSort);
+
+        PageableHandlerMethodArgumentResolver pageableResolver =
+                new PageableHandlerMethodArgumentResolver(sortResolver);
+        pageableResolver.setMaxPageSize(100);
+        pageableResolver.setOneIndexedParameters(true);
+        pageableResolver.setPrefix("paging.");
+        pageableResolver.setFallbackPageable(defaultPageable);
+
+        resolvers.add(sortResolver);
+        resolvers.add(pageableResolver);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        if (!(registry instanceof FormattingConversionService)) {
+            log.warn("Unable to register Spring Data JPA converter.");
+            return;
+        }
+
+        DomainClassConverter<FormattingConversionService> converter =
+                new DomainClassConverter<>((FormattingConversionService) registry);
+        converter.setApplicationContext(this.applicationContext);
+    }
 
     /*
      *设置为utf-8编码

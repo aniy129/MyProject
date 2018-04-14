@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,11 +19,16 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> getAll() {
-        Pageable pageable=new PageRequest(1,1,Sort.Direction.DESC,"Id");
-        List<User> list = userDal.search("",null,pageable).getContent();
-//        Iterable<User> all = userDal.findAll();
-//        List<User> list = new ArrayList<>();
-//        all.forEach(list::add);
+        Iterable<User> all = userDal.findAll();
+        List<User> list = new ArrayList<>();
+        all.forEach(list::add);
         return list;
+    }
+
+    @Override
+    public List<User> search(Pageable pageable) {
+        //Pageable pageable=new PageRequest(1,1,Sort.Direction.DESC,"Id");
+       List<User> list = userDal.search("",null,pageable).getContent();
+       return list;
     }
 }

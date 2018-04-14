@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements SearchableRepository<User> {
     public Page<User> search(String sqlCondition, Map<String, Object> sqlParameters, Pageable pageable) {
         Query selectQuery = this.entityManager.createNativeQuery(" select * from User " + sqlCondition, User.class);
         Query countQuery = this.entityManager.createNativeQuery("select count(1) from User " + sqlCondition);
-        selectQuery.setFirstResult((pageable.getPageNumber()-1)*pageable.getPageSize())
+        selectQuery.setFirstResult(pageable.getOffset())
                 .setMaxResults(pageable.getPageSize());
         if (sqlParameters != null && sqlParameters.size() > 0) {
             for (Map.Entry<String, Object> item : sqlParameters.entrySet()) {
