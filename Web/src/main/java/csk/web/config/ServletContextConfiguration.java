@@ -151,4 +151,14 @@ public class ServletContextConfiguration implements WebMvcConfigurer {
     public RequestToViewNameTranslator viewNameTranslator() {
         return new DefaultRequestToViewNameTranslator();
     }
+
+    /*
+    * 当前上下文全局异常处理
+    * */
+    @Bean
+    public MyExceptionHandler myExceptionHandler() {
+        MyExceptionHandler myExceptionHandler = new MyExceptionHandler();
+        return myExceptionHandler;
+    }
+
 }

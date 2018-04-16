@@ -39,7 +39,6 @@ public class Bootstrap implements WebApplicationInitializer
                 "restfulDispatcher", new DispatcherServlet(restfulContext));
         restfulDispatcher.setLoadOnStartup(2);
         restfulDispatcher.addMapping("/Services/Rest/*");
-
     }
 
 }

@@ -3,15 +3,15 @@ package csk.web.controller;
 import com.google.gson.Gson;
 import csk.entity.database.User;
 import csk.service.interfaces.IUserService;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Controller
 @RequestMapping("/user")
@@ -38,6 +38,22 @@ public class UserController {
         List<User> userList = userService.search(pageable);
         Gson gson = new Gson();
         String json = gson.toJson(userList);
+        new Thread(() -> {
+            for (int x = 0; x < 20; x++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("多线程哈" + x);
+            }
+        }).start();
+        Predicate<String> ps=(n)->n.startsWith("100");
+        boolean test = ps.test("100");
+        Function<String,String>fs=(str)->str+100;
+        String apply = fs.apply("test");
+        System.out.println(test);
+        System.out.println(apply);
         return json;
     }
 }

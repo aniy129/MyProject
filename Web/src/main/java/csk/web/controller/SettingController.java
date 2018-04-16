@@ -42,7 +42,7 @@ public class SettingController {
 
     @RequestMapping("/tran")
     @ResponseBody
-    public String transaction(boolean isException) {
+    public String transaction(boolean isException) throws Exception {
         Setting setting = new Setting();
         setting.setDescription("我的事务测试");
         setting.setValue("1000");
@@ -57,13 +57,14 @@ public class SettingController {
         administrators.setState(1);
         administrators.setUserName("admin");
         administrators.setRegTime(Timestamp.from(Instant.now()));
-        try {
-            bll.addSettingAndAdministrator(setting, administrators, isException);
-        } catch (Exception e) {
-            //  e.printStackTrace();
-            logger.error(e.getMessage(), e);
-            return "已回滚";
-        }
+        bll.addSettingAndAdministrator(setting, administrators, isException);
+//        try {
+//
+//        } catch (Exception e) {
+//            //  e.printStackTrace();
+//            logger.error(e.getMessage(), e);
+//            return "已回滚";
+//        }
         return "事务提交成功";
     }
 
