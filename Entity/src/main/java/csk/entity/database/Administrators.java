@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Administrators")
-public class Administrators {
+public class Administrators   {
 
   private long id;
   @CheckUserNameIsExist

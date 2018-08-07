@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.UUID;
 
 @RequestMapping("/setting")
@@ -71,6 +72,6 @@ public class SettingController {
     @RequestMapping("/list")
     @ResponseBody
     public String list() {
-        return bll.getAll().toArray().toString();
+        return Arrays.toString(bll.getAll().toArray());
     }
 }

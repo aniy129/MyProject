@@ -1,5 +1,6 @@
 package csk.web.controller;
 
+import com.google.gson.Gson;
 import csk.entity.database.Administrators;
 import csk.service.interfaces.IAdministratorsService;
 import csk.web.common.LocaleUntil;
@@ -25,7 +26,7 @@ public class HomeController {
     public String index(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object user = session.getAttribute("user");
-        if (user != null) {
+        if (user != null&&user.toString().length()>0) {
             return "redirect:/main/index";
         }
         return "home/index";
@@ -36,7 +37,7 @@ public class HomeController {
         Administrators administrators = administratorsService.login(userName);
         if (administrators != null && administrators.getPwd().equals(password)) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", administrators);
+            session.setAttribute("user", new Gson().toJson(administrators));
             return "redirect:/main/index";
         } else {
             model.addAttribute("userName", userName);

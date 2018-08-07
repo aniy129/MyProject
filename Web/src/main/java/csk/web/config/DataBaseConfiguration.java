@@ -88,10 +88,14 @@ public class DataBaseConfiguration {
         datasource.setTestOnReturn(testOnReturn);
         try {
             datasource.setFilters(filters);
+            return datasource;
         } catch (SQLException e) {
             logger.error("druid configuration initialization filter", e);
+            return  null;
         }
-        return datasource;
+        finally {
+            datasource.close();
+        }
     }
 
     /*
